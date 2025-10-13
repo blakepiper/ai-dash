@@ -1,0 +1,30 @@
+{
+  "stockLevels": [
+    { "product": "Wireless Headphones", "current": 245, "optimal": 300, "status": "low" },
+    { "product": "Smart Watch", "current": 420, "optimal": 350, "status": "good" },
+    { "product": "Laptop Stand", "current": 580, "optimal": 500, "status": "good" },
+    { "product": "USB-C Cable", "current": 890, "optimal": 800, "status": "good" },
+    { "product": "Portable Charger", "current": 125, "optimal": 400, "status": "critical" },
+    { "product": "Bluetooth Speaker", "current": 340, "optimal": 300, "status": "good" },
+    { "product": "Phone Case", "current": 720, "optimal": 600, "status": "good" },
+    { "product": "Screen Protector", "current": 980, "optimal": 700, "status": "excess" }
+  ],
+  "turnover": [
+    { "category": "Electronics", "rate": 8.5, "daysInStock": 42 },
+    { "category": "Clothing", "rate": 6.2, "daysInStock": 58 },
+    { "category": "Home & Garden", "rate": 4.8, "daysInStock": 75 },
+    { "category": "Sports", "rate": 5.5, "daysInStock": 65 },
+    { "category": "Books", "rate": 3.2, "daysInStock": 112 }
+  ],
+  "warehouse": [
+    { "location": "Warehouse A", "capacity": 10000, "current": 8400, "utilization": 84 },
+    { "location": "Warehouse B", "capacity": 8000, "current": 6200, "utilization": 77.5 },
+    { "location": "Warehouse C", "capacity": 12000, "current": 10800, "utilization": 90 }
+  ],
+  "movements": [
+    { "week": "Week 1", "incoming": 2400, "outgoing": 2850 },
+    { "week": "Week 2", "incoming": 2650, "outgoing": 2920 },
+    { "week": "Week 3", "incoming": 2200, "outgoing": 2450 },
+    { "week": "Week 4", "incoming": 3100, "outgoing": 3200 }
+  ]
+}

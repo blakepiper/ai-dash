@@ -1,0 +1,28 @@
+{
+  "traffic": [
+    { "date": "2024-10-01", "visits": 12400, "pageviews": 34200, "bounceRate": 42 },
+    { "date": "2024-10-08", "visits": 13200, "pageviews": 38500, "bounceRate": 39 },
+    { "date": "2024-10-15", "visits": 14800, "pageviews": 42100, "bounceRate": 38 },
+    { "date": "2024-10-22", "visits": 13900, "pageviews": 39800, "bounceRate": 40 },
+    { "date": "2024-10-29", "visits": 15600, "pageviews": 45200, "bounceRate": 36 }
+  ],
+  "conversion": [
+    { "funnel": "Landing Page", "users": 10000, "percentage": 100 },
+    { "funnel": "Product View", "users": 6200, "percentage": 62 },
+    { "funnel": "Add to Cart", "users": 3100, "percentage": 31 },
+    { "funnel": "Checkout", "users": 1850, "percentage": 18.5 },
+    { "funnel": "Purchase", "users": 1240, "percentage": 12.4 }
+  ],
+  "deviceBreakdown": [
+    { "device": "Desktop", "sessions": 42500, "percentage": 48.5, "avgDuration": 245 },
+    { "device": "Mobile", "sessions": 38200, "percentage": 43.6, "avgDuration": 182 },
+    { "device": "Tablet", "sessions": 6900, "percentage": 7.9, "avgDuration": 198 }
+  ],
+  "topPages": [
+    { "page": "/home", "views": 45200, "avgTime": 125 },
+    { "page": "/products", "views": 38900, "avgTime": 245 },
+    { "page": "/deals", "views": 22400, "avgTime": 198 },
+    { "page": "/blog", "views": 15600, "avgTime": 342 },
+    { "page": "/support", "views": 12800, "avgTime": 285 }
+  ]
+}

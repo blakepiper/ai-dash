@@ -1,0 +1,36 @@
+{
+  "quarterly": [
+    { "quarter": "Q1 2024", "revenue": 245000, "units": 1240, "growth": 12.5 },
+    { "quarter": "Q2 2024", "revenue": 278000, "units": 1450, "growth": 13.5 },
+    { "quarter": "Q3 2024", "revenue": 235000, "units": 1180, "growth": -15.5 },
+    { "quarter": "Q4 2024", "revenue": 312000, "units": 1620, "growth": 32.8 }
+  ],
+  "monthly": [
+    { "month": "Jan 2024", "revenue": 78000, "orders": 420 },
+    { "month": "Feb 2024", "revenue": 82000, "orders": 445 },
+    { "month": "Mar 2024", "revenue": 85000, "orders": 375 },
+    { "month": "Apr 2024", "revenue": 91000, "orders": 480 },
+    { "month": "May 2024", "revenue": 94000, "orders": 510 },
+    { "month": "Jun 2024", "revenue": 93000, "orders": 460 },
+    { "month": "Jul 2024", "revenue": 76000, "orders": 390 },
+    { "month": "Aug 2024", "revenue": 79000, "orders": 395 },
+    { "month": "Sep 2024", "revenue": 80000, "orders": 395 },
+    { "month": "Oct 2024", "revenue": 98000, "orders": 520 },
+    { "month": "Nov 2024", "revenue": 105000, "orders": 550 },
+    { "month": "Dec 2024", "revenue": 109000, "orders": 550 }
+  ],
+  "byCategory": [
+    { "category": "Electronics", "revenue": 425000, "percentage": 39.5 },
+    { "category": "Clothing", "revenue": 312000, "percentage": 29.0 },
+    { "category": "Home & Garden", "revenue": 198000, "percentage": 18.4 },
+    { "category": "Sports", "revenue": 85000, "percentage": 7.9 },
+    { "category": "Books", "revenue": 55000, "percentage": 5.2 }
+  ],
+  "topProducts": [
+    { "name": "Wireless Headphones", "units": 842, "revenue": 126300 },
+    { "name": "Smart Watch", "units": 654, "revenue": 163500 },
+    { "name": "Laptop Stand", "units": 1240, "revenue": 62000 },
+    { "name": "USB-C Cable", "units": 2180, "revenue": 32700 },
+    { "name": "Portable Charger", "units": 1450, "revenue": 72500 }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "demographics": [
+    { "ageGroup": "18-24", "count": 2400, "percentage": 15.2 },
+    { "ageGroup": "25-34", "count": 4800, "percentage": 30.4 },
+    { "ageGroup": "35-44", "count": 4200, "percentage": 26.6 },
+    { "ageGroup": "45-54", "count": 2850, "percentage": 18.1 },
+    { "ageGroup": "55+", "count": 1550, "percentage": 9.8 }
+  ],
+  "retention": [
+    { "cohort": "Jan 2024", "month0": 100, "month1": 78, "month2": 65, "month3": 58 },
+    { "cohort": "Feb 2024", "month0": 100, "month1": 82, "month2": 68, "month3": 61 },
+    { "cohort": "Mar 2024", "month0": 100, "month1": 75, "month2": 62, "month3": 55 },
+    { "cohort": "Apr 2024", "month0": 100, "month1": 80, "month2": 67, "month3": 59 }
+  ],
+  "satisfaction": [
+    { "metric": "Very Satisfied", "count": 6200, "percentage": 62 },
+    { "metric": "Satisfied", "count": 2500, "percentage": 25 },
+    { "metric": "Neutral", "count": 800, "percentage": 8 },
+    { "metric": "Unsatisfied", "count": 350, "percentage": 3.5 },
+    { "metric": "Very Unsatisfied", "count": 150, "percentage": 1.5 }
+  ],
+  "lifetimeValue": [
+    { "segment": "VIP", "avgValue": 5400, "count": 850 },
+    { "segment": "High Value", "avgValue": 2200, "count": 2400 },
+    { "segment": "Medium Value", "avgValue": 850, "count": 5800 },
+    { "segment": "Low Value", "avgValue": 280, "count": 6750 }
+  ],
+  "acquisition": [
+    { "channel": "Organic Search", "customers": 4200, "cost": 42000 },
+    { "channel": "Paid Ads", "customers": 3800, "cost": 95000 },
+    { "channel": "Social Media", "customers": 2900, "cost": 35000 },
+    { "channel": "Referral", "customers": 2400, "cost": 12000 },
+    { "channel": "Email", "customers": 2500, "cost": 8000 }
+  ]
+}
