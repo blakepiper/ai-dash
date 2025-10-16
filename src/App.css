@@ -113,6 +113,7 @@ body {
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s;
+  position: relative;
 }
 
 .session-item:hover {
@@ -121,6 +122,41 @@ body {
 
 .session-item.active {
   background-color: #667eea;
+}
+
+.delete-session-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 6px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.session-item:hover .delete-session-button {
+  display: flex;
+}
+
+.delete-session-button:hover {
+  background-color: rgba(231, 76, 60, 0.2);
+  color: #e74c3c;
+}
+
+.session-item.active .delete-session-button {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.session-item.active .delete-session-button:hover {
+  background-color: rgba(231, 76, 60, 0.3);
+  color: #ff6b6b;
 }
 
 .session-info {

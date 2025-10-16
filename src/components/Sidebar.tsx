@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatSession } from '../types';
-import { MessageSquare, Plus, Clock } from 'lucide-react';
+import { MessageSquare, Plus, Clock, Trash2 } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface SidebarProps {
@@ -8,6 +8,7 @@ interface SidebarProps {
   currentSessionId: string;
   onSelectSession: (sessionId: string) => void;
   onNewSession: () => void;
+  onDeleteSession: (sessionId: string) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -15,7 +16,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
   currentSessionId,
   onSelectSession,
   onNewSession,
+  onDeleteSession,
 }) => {
+  const handleDelete = (e: React.MouseEvent, sessionId: string) => {
+    e.stopPropagation();
+    onDeleteSession(sessionId);
+  };
+
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -54,6 +61,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       {format(new Date(session.lastAccessed), 'MMM d, h:mm a')}
                     </span>
                   </div>
+                  <button
+                    className="delete-session-button"
+                    onClick={(e) => handleDelete(e, session.id)}
+                    title="Delete chat"
+                  >
+                    <Trash2 size={14} />
+                  </button>
                 </div>
               ))
             )}

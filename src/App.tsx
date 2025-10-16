@@ -102,6 +102,29 @@ function App() {
     }
   };
 
+  const handleDeleteSession = (sessionId: string) => {
+    // Remove the session
+    const updatedSessions = sessions.filter((s) => s.id !== sessionId);
+
+    // If we deleted the current session, switch to another one
+    if (sessionId === currentSessionId) {
+      if (updatedSessions.length > 0) {
+        // Switch to the first remaining session
+        setCurrentSessionId(updatedSessions[0].id);
+        setActiveViewId(updatedSessions[0].views[0]?.id || 'home');
+      } else {
+        // No sessions left, create a new one
+        const newSession = createNewSession();
+        setSessions([newSession]);
+        setCurrentSessionId(newSession.id);
+        setActiveViewId('home');
+        return;
+      }
+    }
+
+    setSessions(updatedSessions);
+  };
+
   const handleSubmitQuery = (query: string) => {
     if (!currentSession || !currentView) return;
 
@@ -160,6 +183,7 @@ function App() {
         currentSessionId={currentSessionId}
         onSelectSession={handleSelectSession}
         onNewSession={handleNewSession}
+        onDeleteSession={handleDeleteSession}
       />
 
       <div className="main-content">
