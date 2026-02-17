@@ -24,20 +24,31 @@ export const ResponseCard: React.FC<ResponseCardProps> = ({ response }) => {
   };
 
   const handleDownloadCSV = () => {
-    if (!response.chart) return;
+    if (!response.chart || response.chart.data.length === 0) return;
 
     const data = response.chart.data;
     const keys = Object.keys(data[0]);
+
+    const escapeCSV = (value: unknown): string => {
+      const str = String(value ?? '');
+      if (str.includes(',') || str.includes('"') || str.includes('\n')) {
+        return `"${str.replace(/"/g, '""')}"`;
+      }
+      return str;
+    };
+
     const csv = [
-      keys.join(','),
-      ...data.map(row => keys.map(key => row[key]).join(','))
+      keys.map(escapeCSV).join(','),
+      ...data.map(row => keys.map(key => escapeCSV(row[key])).join(','))
     ].join('\n');
 
     const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.download = `data-${response.id}.csv`;
-    link.href = URL.createObjectURL(blob);
+    link.href = url;
     link.click();
+    URL.revokeObjectURL(url);
   };
 
   const handleCopyText = () => {

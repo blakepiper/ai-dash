@@ -1,176 +1,64 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { Sidebar } from './components/Sidebar';
 import { TabBar } from './components/TabBar';
 import { ViewTab } from './components/ViewTab';
-import { ChatSession, View, ConversationMessage } from './types';
-import { processQuery } from './services/mockAI';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { useSessionManager } from './hooks/useSessionManager';
+import { useViewManager } from './hooks/useViewManager';
+import { useQueryHandler } from './hooks/useQueryHandler';
+import { useDarkMode } from './hooks/useDarkMode';
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { Moon, Sun } from 'lucide-react';
 import './App.css';
 
-const generateId = () => Math.random().toString(36).substr(2, 9);
-
-const createHomeView = (): View => ({
-  id: 'home',
-  name: 'Home',
-  messages: [],
-  createdAt: new Date(),
-});
-
-const createNewView = (number: number): View => ({
-  id: generateId(),
-  name: `Analysis ${number}`,
-  messages: [],
-  createdAt: new Date(),
-});
-
-const createNewSession = (): ChatSession => ({
-  id: generateId(),
-  name: `Session ${new Date().toLocaleDateString()}`,
-  views: [createHomeView()],
-  lastAccessed: new Date(),
-});
-
 function App() {
-  const [sessions, setSessions] = useState<ChatSession[]>([]);
-  const [currentSessionId, setCurrentSessionId] = useState<string>('');
-  const [activeViewId, setActiveViewId] = useState<string>('home');
+  const {
+    sessions,
+    setSessions,
+    currentSessionId,
+    setCurrentSessionId,
+    currentSession,
+    handleNewSession,
+    handleSelectSession,
+    handleRenameSession,
+    handleDeleteSession,
+  } = useSessionManager();
+
+  const {
+    activeViewId,
+    setActiveViewId,
+    currentView,
+    handleNewView,
+    handleCloseView,
+  } = useViewManager(currentSession, currentSessionId, setSessions);
+
+  const { handleSubmitQuery } = useQueryHandler(
+    currentSession,
+    currentView,
+    currentSessionId,
+    activeViewId,
+    setSessions
+  );
+
+  const { isDark, toggleDark } = useDarkMode();
+
+  // Keyboard shortcuts
+  const newSessionShortcut = useCallback(
+    () => handleNewSession(setActiveViewId),
+    [handleNewSession, setActiveViewId]
+  );
+
+  useKeyboardShortcuts({
+    onNewSession: newSessionShortcut,
+    onNewView: handleNewView,
+  });
 
   // Initialize with a default session
   useEffect(() => {
-    const initialSession = createNewSession();
-    setSessions([initialSession]);
-    setCurrentSessionId(initialSession.id);
-  }, []);
-
-  const currentSession = sessions.find((s) => s.id === currentSessionId);
-  const currentView = currentSession?.views.find((v) => v.id === activeViewId);
-
-  const handleNewSession = () => {
-    const newSession = createNewSession();
-    setSessions((prev) => [newSession, ...prev]);
-    setCurrentSessionId(newSession.id);
-    setActiveViewId('home');
-  };
-
-  const handleSelectSession = (sessionId: string) => {
-    setCurrentSessionId(sessionId);
-    const session = sessions.find((s) => s.id === sessionId);
-    if (session) {
-      setActiveViewId(session.views[0]?.id || 'home');
-
-      // Update last accessed
-      setSessions((prev) =>
-        prev.map((s) =>
-          s.id === sessionId ? { ...s, lastAccessed: new Date() } : s
-        )
-      );
+    if (sessions.length > 0 && !currentSessionId) {
+      setCurrentSessionId(sessions[0].id);
     }
-  };
-
-  const handleNewView = () => {
-    if (!currentSession) return;
-
-    const viewNumber = currentSession.views.length;
-    const newView = createNewView(viewNumber);
-
-    setSessions((prev) =>
-      prev.map((session) =>
-        session.id === currentSessionId
-          ? { ...session, views: [...session.views, newView] }
-          : session
-      )
-    );
-
-    setActiveViewId(newView.id);
-  };
-
-  const handleCloseView = (viewId: string) => {
-    if (!currentSession || viewId === 'home') return;
-
-    const updatedViews = currentSession.views.filter((v) => v.id !== viewId);
-
-    setSessions((prev) =>
-      prev.map((session) =>
-        session.id === currentSessionId
-          ? { ...session, views: updatedViews }
-          : session
-      )
-    );
-
-    // Switch to home if closing active view
-    if (viewId === activeViewId) {
-      setActiveViewId('home');
-    }
-  };
-
-  const handleDeleteSession = (sessionId: string) => {
-    // Remove the session
-    const updatedSessions = sessions.filter((s) => s.id !== sessionId);
-
-    // If we deleted the current session, switch to another one
-    if (sessionId === currentSessionId) {
-      if (updatedSessions.length > 0) {
-        // Switch to the first remaining session
-        setCurrentSessionId(updatedSessions[0].id);
-        setActiveViewId(updatedSessions[0].views[0]?.id || 'home');
-      } else {
-        // No sessions left, create a new one
-        const newSession = createNewSession();
-        setSessions([newSession]);
-        setCurrentSessionId(newSession.id);
-        setActiveViewId('home');
-        return;
-      }
-    }
-
-    setSessions(updatedSessions);
-  };
-
-  const handleSubmitQuery = (query: string) => {
-    if (!currentSession || !currentView) return;
-
-    // Get the last response for context (for iterations like "make it a bar chart")
-    const lastMessage = currentView.messages[currentView.messages.length - 1];
-    const lastResponse = lastMessage?.response;
-
-    // Process the query through our mock AI
-    const response = processQuery(query, lastResponse);
-
-    // Create the conversation message
-    const newMessage: ConversationMessage = {
-      id: generateId(),
-      userQuery: query,
-      response,
-      timestamp: new Date(),
-    };
-
-    // Update the session with the new message
-    setSessions((prev) =>
-      prev.map((session) =>
-        session.id === currentSessionId
-          ? {
-              ...session,
-              views: session.views.map((view) =>
-                view.id === activeViewId
-                  ? { ...view, messages: [...view.messages, newMessage] }
-                  : view
-              ),
-              lastAccessed: new Date(),
-            }
-          : session
-      )
-    );
-
-    // Update session name if it's the first message
-    if (currentView.messages.length === 0) {
-      setSessions((prev) =>
-        prev.map((session) =>
-          session.id === currentSessionId
-            ? { ...session, name: query.slice(0, 50) + (query.length > 50 ? '...' : '') }
-            : session
-        )
-      );
-    }
-  };
+  }, [sessions, currentSessionId, setCurrentSessionId]);
 
   if (!currentSession || !currentView) {
     return <div>Loading...</div>;
@@ -181,9 +69,10 @@ function App() {
       <Sidebar
         sessions={sessions}
         currentSessionId={currentSessionId}
-        onSelectSession={handleSelectSession}
-        onNewSession={handleNewSession}
-        onDeleteSession={handleDeleteSession}
+        onSelectSession={(id) => handleSelectSession(id, setActiveViewId)}
+        onNewSession={() => handleNewSession(setActiveViewId)}
+        onRenameSession={handleRenameSession}
+        onDeleteSession={(id) => handleDeleteSession(id, setActiveViewId)}
       />
 
       <div className="main-content">
@@ -195,11 +84,22 @@ function App() {
           onCloseView={handleCloseView}
         />
 
-        <ViewTab
-          view={currentView}
-          onSubmitQuery={handleSubmitQuery}
-          isHome={currentView.name === 'Home'}
-        />
+        <button
+          className="theme-toggle"
+          onClick={toggleDark}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          title={isDark ? 'Light mode' : 'Dark mode'}
+        >
+          {isDark ? <Sun size={16} /> : <Moon size={16} />}
+        </button>
+
+        <ErrorBoundary>
+          <ViewTab
+            view={currentView}
+            onSubmitQuery={handleSubmitQuery}
+            isHome={currentView.name === 'Home'}
+          />
+        </ErrorBoundary>
       </div>
     </div>
   );

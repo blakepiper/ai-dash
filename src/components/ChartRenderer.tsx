@@ -29,7 +29,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({ chart }) => {
     switch (chart.type) {
       case 'line':
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={chart.data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey={chart.xKey} />
@@ -60,7 +60,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({ chart }) => {
 
       case 'bar':
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chart.data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey={chart.xKey} />
@@ -84,7 +84,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({ chart }) => {
 
       case 'area':
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={chart.data}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey={chart.xKey} />
@@ -118,7 +118,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({ chart }) => {
       case 'pie':
         const pieDataKey = Array.isArray(chart.yKey) ? chart.yKey[0] : (chart.yKey || 'percentage');
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
                 data={chart.data}
@@ -144,7 +144,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({ chart }) => {
       case 'funnel':
         // Custom funnel using bar chart
         return (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={chart.data}
               layout="vertical"
@@ -174,7 +174,9 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({ chart }) => {
   return (
     <div className="chart-container">
       <h3 className="chart-title">{chart.title}</h3>
-      {renderChart()}
+      <div className="chart-responsive-wrapper">
+        {renderChart()}
+      </div>
     </div>
   );
 };

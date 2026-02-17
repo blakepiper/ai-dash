@@ -17,25 +17,36 @@ export const TabBar: React.FC<TabBarProps> = ({
   onNewView,
   onCloseView,
 }) => {
+  const handleClose = (e: React.MouseEvent, view: View) => {
+    e.stopPropagation();
+    if (view.messages.length > 0) {
+      if (!window.confirm(`Close "${view.name}"? Messages in this tab will be lost.`)) {
+        return;
+      }
+    }
+    onCloseView(view.id);
+  };
+
   return (
-    <div className="tab-bar">
+    <div className="tab-bar" role="tablist" aria-label="Analysis views">
       <div className="tabs-container">
         {views.map((view) => (
           <div
             key={view.id}
             className={`tab ${view.id === activeViewId ? 'active' : ''}`}
             onClick={() => onSelectView(view.id)}
+            role="tab"
+            aria-selected={view.id === activeViewId}
+            tabIndex={view.id === activeViewId ? 0 : -1}
           >
             {view.name === 'Home' && <Home size={16} />}
             <span className="tab-name">{view.name}</span>
             {view.name !== 'Home' && (
               <button
                 className="close-tab-button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onCloseView(view.id);
-                }}
+                onClick={(e) => handleClose(e, view)}
                 title="Close tab"
+                aria-label={`Close ${view.name}`}
               >
                 <X size={14} />
               </button>

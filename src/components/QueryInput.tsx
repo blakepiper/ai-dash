@@ -62,12 +62,14 @@ export const QueryInput: React.FC<QueryInputProps> = ({ onSubmit, disabled }) =>
           placeholder="Ask a question or request a visualization..."
           disabled={disabled}
           rows={1}
+          aria-label="Query input"
         />
         <button
           className="submit-button"
           onClick={handleSubmit}
           disabled={!query.trim() || disabled}
           title="Send query"
+          aria-label="Send query"
         >
           <Send size={20} />
         </button>

@@ -4,7 +4,7 @@ export type ChartType = 'line' | 'bar' | 'area' | 'pie' | 'funnel';
 
 export interface ChartData {
   type: ChartType;
-  data: any[];
+  data: Record<string, string | number>[];
   xKey?: string;
   yKey?: string | string[];
   title: string;
