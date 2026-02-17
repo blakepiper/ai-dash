@@ -1,0 +1,54 @@
+{
+  "datasets": [
+    {
+      "name": "sales",
+      "description": "Sales revenue and product data across quarters, months, and categories",
+      "columns": [
+        { "name": "quarter", "type": "string", "description": "Fiscal quarter (e.g., Q1 2024)" },
+        { "name": "revenue", "type": "number", "description": "Total revenue in USD", "businessTerm": "Net Revenue" },
+        { "name": "units", "type": "number", "description": "Total units sold" },
+        { "name": "growth", "type": "number", "description": "Quarter-over-quarter growth percentage" },
+        { "name": "month", "type": "string", "description": "Calendar month" },
+        { "name": "category", "type": "string", "description": "Product category name" }
+      ]
+    },
+    {
+      "name": "customers",
+      "description": "Customer demographics, satisfaction, retention, and lifetime value data",
+      "columns": [
+        { "name": "ageGroup", "type": "string", "description": "Customer age bracket" },
+        { "name": "count", "type": "number", "description": "Number of customers in segment" },
+        { "name": "segment", "type": "string", "description": "Customer value segment (VIP, High, Medium, Low)", "businessTerm": "CLV Segment" },
+        { "name": "avgValue", "type": "number", "description": "Average customer lifetime value in USD", "businessTerm": "CLV" }
+      ]
+    },
+    {
+      "name": "analytics",
+      "description": "Website traffic, conversion funnel, and device breakdown analytics",
+      "columns": [
+        { "name": "date", "type": "string", "description": "Weekly date marker" },
+        { "name": "visits", "type": "number", "description": "Total website visits" },
+        { "name": "pageviews", "type": "number", "description": "Total page views" },
+        { "name": "bounceRate", "type": "number", "description": "Percentage of single-page sessions", "businessTerm": "Bounce Rate" }
+      ]
+    },
+    {
+      "name": "inventory",
+      "description": "Stock levels, turnover rates, and warehouse utilization data",
+      "columns": [
+        { "name": "product", "type": "string", "description": "Product name" },
+        { "name": "current", "type": "number", "description": "Current stock level in units" },
+        { "name": "optimal", "type": "number", "description": "Target stock level" },
+        { "name": "status", "type": "string", "description": "Stock status (Critical, Low, Healthy, Excess)" }
+      ]
+    }
+  ],
+  "glossary": {
+    "CLV": "Customer Lifetime Value — total predicted revenue from a customer over the entire relationship",
+    "CAC": "Customer Acquisition Cost — cost to acquire one new customer",
+    "Bounce Rate": "Percentage of visitors who leave after viewing only one page",
+    "Conversion Rate": "Percentage of visitors who complete a desired action",
+    "Turnover Rate": "Number of times inventory is sold and replaced in a period",
+    "NPS": "Net Promoter Score — measure of customer loyalty and satisfaction"
+  }
+}

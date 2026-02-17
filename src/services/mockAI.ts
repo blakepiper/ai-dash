@@ -74,6 +74,11 @@ const queryPatterns: QueryPattern[] = [
       },
       text: 'Sales performance across quarters shows strong growth in Q4 2024, recovering from a dip in Q3.',
       explanation: 'This chart shows quarterly revenue trends for 2024. Q4 saw exceptional growth at 32.8%, recovering from a 15.5% decline in Q3. The Q3 drop was likely due to seasonal factors and market conditions, while Q4 benefited from holiday season sales.',
+      followUpSuggestions: [
+        'Why did sales drop in Q3?',
+        'Show sales by category',
+        'Compare revenue vs units sold',
+      ],
       interpretation: {
         intent: 'Visualize sales trends over quarterly time periods',
         entities: ['sales', 'quarterly', 'revenue'],
@@ -103,6 +108,11 @@ const queryPatterns: QueryPattern[] = [
       },
       text: 'December 2024 had the highest monthly revenue at $109,000.',
       explanation: 'Monthly revenue breakdown shows consistent growth from October through December, with a notable dip during the summer months (July-September). The year-end surge is typical for retail with holiday shopping season.',
+      followUpSuggestions: [
+        'What were our top selling products last month?',
+        'Show sales by category',
+        'Make it a line chart',
+      ],
       interpretation: {
         intent: 'Display monthly sales data with bar chart visualization',
         entities: ['monthly', 'revenue', 'sales'],
@@ -133,6 +143,11 @@ const queryPatterns: QueryPattern[] = [
 
 The Smart Watch leads in revenue despite selling fewer units than some other products, indicating a higher price point. USB-C Cables had the highest unit sales but lower revenue due to the lower price point.`,
       explanation: 'This analysis ranks products by both revenue and units sold, highlighting that volume doesn\'t always correlate with revenue impact.',
+      followUpSuggestions: [
+        'Show sales by category',
+        'What is the inventory status?',
+        'Show customer lifetime value',
+      ],
       interpretation: {
         intent: 'Identify and rank top-performing products',
         entities: ['products', 'sales', 'ranking'],
@@ -168,6 +183,11 @@ The Smart Watch leads in revenue despite selling fewer units than some other pro
 **Recovery Strategy:**
 Q4's strong recovery (32.8% growth) suggests our response strategies were effective: expanded inventory, holiday promotions, and improved mobile experience.`,
       explanation: 'This analysis combines sales data with inventory, customer behavior, and market factors to explain the Q3 performance anomaly.',
+      followUpSuggestions: [
+        'Show me sales over the last quarter',
+        'What is the inventory status?',
+        'Show me the conversion funnel',
+      ],
       interpretation: {
         intent: 'Explain causal factors behind sales decline',
         entities: ['Q3', 'sales decline', 'analysis'],
@@ -195,6 +215,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Electronics dominates with 39.5% of total sales, followed by Clothing at 29.0%.',
       explanation: 'Category distribution shows Electronics and Clothing account for nearly 70% of revenue. This concentration suggests opportunity for diversification while doubling down on these core strengths.',
+      followUpSuggestions: [
+        'What were our top selling products last month?',
+        'Show monthly revenue',
+        'Make it a bar chart',
+      ],
       interpretation: {
         intent: 'Show sales distribution across product categories',
         entities: ['categories', 'sales', 'distribution'],
@@ -224,6 +249,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Our largest customer segment is 25-34 year olds, representing 30.4% of our customer base.',
       explanation: 'The customer base skews younger, with 72.2% of customers under 45. The 25-34 age group is both the largest segment and typically has high lifetime value. Consider targeting marketing efforts to maintain and grow this demographic.',
+      followUpSuggestions: [
+        'How satisfied are our customers?',
+        'Show customer lifetime value',
+        'What are our acquisition channels?',
+      ],
       interpretation: {
         intent: 'Visualize customer age distribution',
         entities: ['customers', 'demographics', 'age groups'],
@@ -251,6 +281,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: '87% of customers are satisfied or very satisfied with our service.',
       explanation: 'Overall satisfaction is strong with 62% very satisfied and 25% satisfied. Only 5% report dissatisfaction. This high satisfaction rate correlates with our strong retention metrics and suggests positive word-of-mouth potential.',
+      followUpSuggestions: [
+        'Show customer retention by cohort',
+        'What are customer demographics?',
+        'Show customer lifetime value',
+      ],
       interpretation: {
         intent: 'Display customer satisfaction metrics',
         entities: ['satisfaction', 'customers', 'feedback'],
@@ -288,6 +323,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
 
 **Recommendation:** Priority reorder for Portable Chargers to avoid stockouts. Consider promotion for Screen Protectors to reduce excess inventory.`,
       explanation: 'This analysis categorizes inventory by urgency, highlighting items requiring immediate action versus those in healthy ranges.',
+      followUpSuggestions: [
+        'Show inventory turnover rates',
+        'Show warehouse utilization',
+        'What were our top selling products last month?',
+      ],
       interpretation: {
         intent: 'Assess current inventory health and identify issues',
         entities: ['inventory', 'stock levels', 'status'],
@@ -315,6 +355,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Overall conversion rate from landing page to purchase is 12.4%.',
       explanation: 'The biggest drop-off occurs between Product View (62%) and Add to Cart (31%), losing half of interested users. The checkout-to-purchase rate is relatively strong at 67%, suggesting the checkout process is smooth. Focus optimization efforts on the product page and add-to-cart experience.',
+      followUpSuggestions: [
+        'Show website traffic trends',
+        'What is the device breakdown?',
+        'Show bounce rate trends',
+      ],
       interpretation: {
         intent: 'Visualize conversion funnel and identify drop-off points',
         entities: ['conversion', 'funnel', 'user journey'],
@@ -344,6 +389,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Traffic has grown 25.8% over the past month, reaching 15,600 visits.',
       explanation: 'Weekly traffic shows healthy growth with bounce rate improving from 42% to 36%. The mid-October spike to 14,800 visits coincides with a promotional campaign. Sustained growth suggests effective marketing and SEO efforts.',
+      followUpSuggestions: [
+        'Show me the conversion funnel',
+        'Show bounce rate trends',
+        'What is the device breakdown?',
+      ],
       interpretation: {
         intent: 'Display website traffic trends over time',
         entities: ['traffic', 'visits', 'trend'],
@@ -373,6 +423,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Feb 2024 cohort shows the best retention at 61% after 3 months.',
       explanation: 'Retention analysis by monthly cohort shows average 3-month retention of 58%. The Feb cohort outperforms others, likely due to a loyalty program launch. March cohort has the lowest retention, correlating with aggressive acquisition campaigns that brought lower-intent users.',
+      followUpSuggestions: [
+        'How satisfied are our customers?',
+        'What are our acquisition channels?',
+        'Show customer lifetime value',
+      ],
       interpretation: {
         intent: 'Analyze customer retention across cohorts',
         entities: ['retention', 'cohorts', 'churn'],
@@ -403,6 +458,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Organic Search is our most effective channel with 4,200 customers at $10/customer. Paid Ads bring 3,800 customers but at $25/customer.',
       explanation: 'Organic Search and Email have the lowest CAC ($10 and $3.20 respectively), while Paid Ads have the highest at $25/customer. Referral is highly cost-effective at $5/customer. Consider shifting budget from Paid Ads to Referral and Email programs.',
+      followUpSuggestions: [
+        'Show customer retention by cohort',
+        'Show customer lifetime value',
+        'Show me the conversion funnel',
+      ],
       interpretation: {
         intent: 'Analyze customer acquisition channels and costs',
         entities: ['acquisition', 'channels', 'CAC'],
@@ -432,6 +492,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'VIP customers (850 users) have an average lifetime value of $5,400, nearly 20x higher than Low Value customers.',
       explanation: 'The top two segments (VIP + High Value) represent only 20% of customers but account for a disproportionate share of revenue. Focus retention efforts on VIP customers and develop upgrade paths from Medium to High Value segments.',
+      followUpSuggestions: [
+        'What are customer demographics?',
+        'What are our acquisition channels?',
+        'Show customer retention by cohort',
+      ],
       interpretation: {
         intent: 'Analyze customer lifetime value distribution',
         entities: ['CLV', 'segments', 'value'],
@@ -459,6 +524,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Desktop leads at 48.5% of sessions, with Mobile close behind at 43.6%. Tablet accounts for 7.9%.',
       explanation: 'Mobile traffic (43.6%) is approaching desktop levels but has 26% shorter session duration (182s vs 245s). This suggests mobile users are more task-oriented. Optimizing mobile conversion could significantly impact overall revenue.',
+      followUpSuggestions: [
+        'Show website traffic trends',
+        'Show me the conversion funnel',
+        'Show bounce rate trends',
+      ],
       interpretation: {
         intent: 'Show device usage distribution',
         entities: ['devices', 'mobile', 'desktop'],
@@ -488,6 +558,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Q4 2024 achieved highest revenue ($312K) and units (1,620). Q3 dipped in both metrics.',
       explanation: 'Revenue and unit growth generally track together, but Q4 shows a slightly higher revenue-per-unit ratio, suggesting either price increases or a shift toward higher-value products during holiday season.',
+      followUpSuggestions: [
+        'Why did sales drop in Q3?',
+        'Show sales by category',
+        'What were our top selling products last month?',
+      ],
       interpretation: {
         intent: 'Compare revenue and unit sales metrics',
         entities: ['revenue', 'units', 'comparison'],
@@ -517,6 +592,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Electronics has the highest turnover rate at 8.5x, with an average of 42 days in stock. Books are slowest at 3.2x (112 days).',
       explanation: 'High turnover in Electronics correlates with strong demand. Books have the lowest turnover, suggesting either overstocking or declining demand. Consider reducing Book inventory and reallocating warehouse space to faster-moving categories.',
+      followUpSuggestions: [
+        'What is the inventory status?',
+        'Show warehouse utilization',
+        'Show sales by category',
+      ],
       interpretation: {
         intent: 'Analyze inventory turnover rates',
         entities: ['inventory', 'turnover', 'categories'],
@@ -545,6 +625,11 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Warehouse C is at 90% capacity (10,800/12,000 units). Warehouse B has the most available space at 77.5%.',
       explanation: 'Warehouse C is approaching critical capacity and may need overflow planning. Warehouse B has the most room for expansion. Consider redistributing inventory from C to B to balance utilization and avoid bottlenecks.',
+      followUpSuggestions: [
+        'Show inventory turnover rates',
+        'What is the inventory status?',
+        'Show sales by category',
+      ],
       interpretation: {
         intent: 'Assess warehouse utilization and capacity',
         entities: ['warehouse', 'capacity', 'utilization'],
@@ -573,11 +658,218 @@ Q4's strong recovery (32.8% growth) suggests our response strategies were effect
       },
       text: 'Bounce rate improved from 42% to 36% over the month, while pageviews per visit increased from 2.76 to 2.90.',
       explanation: 'The improving bounce rate and growing pageviews-per-visit ratio indicate better content engagement. Users are exploring more pages per session, suggesting improved site navigation and more compelling content.',
+      followUpSuggestions: [
+        'Show website traffic trends',
+        'Show me the conversion funnel',
+        'What is the device breakdown?',
+      ],
       interpretation: {
         intent: 'Analyze traffic engagement metrics',
         entities: ['bounce rate', 'pageviews', 'engagement'],
         dataSource: 'analytics.json - traffic data',
         assumptions: ['Multi-metric view shows engagement quality', 'Declining bounce rate is positive'],
+      },
+      timestamp: new Date(),
+    }),
+  },
+
+  // Scatter plot - revenue vs units
+  {
+    patterns: [
+      /scatter.*plot/i,
+      /scatter.*chart/i,
+      /correlation/i,
+    ],
+    handler: () => ({
+      id: generateId(),
+      type: 'mixed' as const,
+      chart: {
+        type: 'scatter' as const,
+        data: salesData.quarterly.map((q: any) => ({ quarter: q.quarter, revenue: q.revenue, units: q.units })),
+        xKey: 'units',
+        yKey: 'revenue',
+        title: 'Revenue vs Units Correlation',
+      },
+      text: 'Scatter plot showing the relationship between units sold and revenue across quarters.',
+      explanation: 'There is a positive correlation between units sold and revenue, which is expected. However, the relationship is not perfectly linear — Q4 shows higher revenue per unit compared to other quarters, suggesting a shift toward premium products.',
+      followUpSuggestions: [
+        'Show me sales over the last quarter',
+        'Compare revenue vs units sold',
+        'Show sales by category',
+      ],
+      interpretation: {
+        intent: 'Visualize correlation between two metrics',
+        entities: ['scatter plot', 'revenue', 'units', 'correlation'],
+        dataSource: 'sales.json - quarterly data',
+        assumptions: ['User wants to see relationship between metrics'],
+      },
+      timestamp: new Date(),
+    }),
+  },
+
+  // KPI / Key metrics
+  {
+    patterns: [
+      /(?:kpi|key.*metric|key.*performance)/i,
+      /summary.*metric/i,
+      /dashboard.*summary/i,
+    ],
+    handler: () => ({
+      id: generateId(),
+      type: 'chart' as const,
+      chart: {
+        type: 'kpi' as const,
+        data: [],
+        title: 'Total Revenue (Q4 2024)',
+        kpiData: {
+          value: '$312,000',
+          label: 'Total Revenue (Q4 2024)',
+          trend: 'up' as const,
+          changePercent: 32.8,
+          comparisonLabel: 'vs Q3 2024',
+        },
+      },
+      explanation: 'Q4 2024 revenue reached $312,000, a 32.8% increase over Q3. This represents the strongest quarter of the year, driven by holiday season demand and successful promotional campaigns.',
+      followUpSuggestions: [
+        'Show me sales over the last quarter',
+        'Why did sales drop in Q3?',
+        'Show customer satisfaction',
+      ],
+      interpretation: {
+        intent: 'Display key performance indicator',
+        entities: ['KPI', 'revenue', 'Q4'],
+        dataSource: 'sales.json - quarterly data',
+        assumptions: ['User wants headline metrics', 'Most recent quarter is relevant'],
+      },
+      timestamp: new Date(),
+    }),
+  },
+
+  // Stacked bar chart
+  {
+    patterns: [
+      /stacked.*bar/i,
+      /stacked.*chart/i,
+    ],
+    handler: () => ({
+      id: generateId(),
+      type: 'mixed' as const,
+      chart: {
+        type: 'stackedBar' as const,
+        data: salesData.quarterly.map((q: any) => ({
+          quarter: q.quarter,
+          revenue: q.revenue,
+          units: q.units * 100,
+        })),
+        xKey: 'quarter',
+        stackKeys: ['revenue', 'units'],
+        title: 'Revenue & Units (Stacked)',
+      },
+      text: 'Stacked bar chart showing revenue and scaled unit values across quarters.',
+      explanation: 'This stacked view shows the combined magnitude of revenue and units per quarter. Q4 dominates both metrics, while Q3 shows the lowest combined total.',
+      followUpSuggestions: [
+        'Show me sales over the last quarter',
+        'Compare revenue vs units sold',
+        'Make it a bar chart',
+      ],
+      interpretation: {
+        intent: 'Show stacked comparison of multiple metrics',
+        entities: ['stacked bar', 'revenue', 'units'],
+        dataSource: 'sales.json - quarterly data',
+        assumptions: ['Stacked format shows cumulative contribution'],
+      },
+      timestamp: new Date(),
+    }),
+  },
+
+  // Table view
+  {
+    patterns: [
+      /show.*(?:as|in).*table/i,
+      /table.*(?:view|format)/i,
+      /raw.*data/i,
+    ],
+    handler: (_query, lastResponse) => {
+      if (lastResponse?.chart && lastResponse.chart.data.length > 0) {
+        return {
+          id: generateId(),
+          type: 'mixed' as const,
+          chart: {
+            ...lastResponse.chart,
+            type: 'table' as const,
+            title: `${lastResponse.chart.title} (Table View)`,
+          },
+          text: 'Here is the data in table format. Click column headers to sort.',
+          explanation: 'Table view allows you to see the exact values and sort by any column for detailed analysis.',
+          followUpSuggestions: [
+            'Make it a bar chart',
+            'Make it a line chart',
+            'Show as area chart',
+          ],
+          interpretation: {
+            intent: 'Display data in tabular format',
+            entities: ['table', 'data view'],
+            dataSource: lastResponse.interpretation.dataSource,
+            assumptions: ['User wants to see raw data values'],
+          },
+          timestamp: new Date(),
+        };
+      }
+      return {
+        id: generateId(),
+        type: 'mixed' as const,
+        chart: {
+          type: 'table' as const,
+          data: salesData.quarterly,
+          xKey: 'quarter',
+          yKey: 'revenue',
+          title: 'Quarterly Sales Data (Table)',
+        },
+        text: 'Here is the quarterly sales data in table format. Click column headers to sort.',
+        explanation: 'Table view provides a detailed look at the exact values. You can sort by clicking on column headers.',
+        followUpSuggestions: [
+          'Show me sales over the last quarter',
+          'Make it a bar chart',
+          'Show sales by category',
+        ],
+        interpretation: {
+          intent: 'Display data in tabular format',
+          entities: ['table', 'quarterly data'],
+          dataSource: 'sales.json - quarterly data',
+          assumptions: ['User wants to see raw data values'],
+        },
+        timestamp: new Date(),
+      };
+    },
+  },
+
+  // Treemap
+  {
+    patterns: [
+      /treemap/i,
+      /tree.*map/i,
+    ],
+    handler: () => ({
+      id: generateId(),
+      type: 'mixed' as const,
+      chart: {
+        type: 'treemap' as const,
+        data: salesData.byCategory.map((c: any) => ({ name: c.name, value: c.revenue || c.percentage })),
+        yKey: 'value',
+        title: 'Sales by Category (Treemap)',
+      },
+      text: 'Treemap showing relative size of each sales category.',
+      explanation: 'The treemap visualization makes it easy to see the proportional contribution of each category. Electronics clearly dominates, followed by Clothing. This hierarchical view is useful for spotting the relative weight of categories at a glance.',
+      followUpSuggestions: [
+        'Show sales by category',
+        'What were our top selling products last month?',
+        'Show as table',
+      ],
+      interpretation: {
+        intent: 'Visualize hierarchical data proportions',
+        entities: ['treemap', 'categories', 'sales'],
+        dataSource: 'sales.json - byCategory data',
+        assumptions: ['Treemap best shows proportional sizes'],
       },
       timestamp: new Date(),
     }),
@@ -643,6 +935,29 @@ export const processQuery = (
   // Should never reach here due to fallback pattern, but just in case
   return queryPatterns[queryPatterns.length - 1].handler(query, lastResponse);
 };
+
+// LLM Provider wrapper for mock AI
+export const createMockProvider = () => ({
+  async sendQuery(query: string, context?: { lastResponse?: ResponseMessage }) {
+    const result = processQuery(query, context?.lastResponse);
+    return {
+      text: result.text,
+      chartConfig: result.chart ? {
+        type: result.chart.type,
+        data: result.chart.data,
+        xKey: result.chart.xKey,
+        yKey: result.chart.yKey,
+        title: result.chart.title,
+      } : undefined,
+      followUpSuggestions: result.followUpSuggestions,
+      explanation: result.explanation,
+      interpretation: result.interpretation,
+    };
+  },
+  async testConnection() {
+    return true;
+  },
+});
 
 // Pre-configured queries for example/quick access
 export const exampleQueries = [

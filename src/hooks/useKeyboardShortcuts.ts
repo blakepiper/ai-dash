@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 interface ShortcutHandlers {
   onNewSession: () => void;
   onNewView: () => void;
+  onToggleCommandPalette?: () => void;
 }
 
-export function useKeyboardShortcuts({ onNewSession, onNewView }: ShortcutHandlers) {
+export function useKeyboardShortcuts({ onNewSession, onNewView, onToggleCommandPalette }: ShortcutHandlers) {
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       const isMod = e.metaKey || e.ctrlKey;
@@ -20,10 +21,14 @@ export function useKeyboardShortcuts({ onNewSession, onNewView }: ShortcutHandle
           e.preventDefault();
           onNewView();
           break;
+        case 'k':
+          e.preventDefault();
+          onToggleCommandPalette?.();
+          break;
       }
     };
 
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [onNewSession, onNewView]);
+  }, [onNewSession, onNewView, onToggleCommandPalette]);
 }

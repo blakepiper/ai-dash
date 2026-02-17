@@ -1,9 +1,17 @@
 import React from 'react';
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import App from './App';
 
 // Mock html2canvas
 jest.mock('html2canvas', () => () => Promise.resolve({ toDataURL: () => '' }));
+
+// Mark setup wizard as complete so tests can access the main UI
+beforeEach(() => {
+  localStorage.setItem('ai-dash-setup', JSON.stringify({ isComplete: true, currentStep: 4 }));
+});
+afterEach(() => {
+  localStorage.clear();
+});
 
 // Mock recharts
 jest.mock('recharts', () => ({
@@ -22,6 +30,10 @@ jest.mock('recharts', () => ({
   CartesianGrid: () => null,
   Tooltip: () => null,
   Legend: () => null,
+  ScatterChart: ({ children }: any) => <div>{children}</div>,
+  Scatter: () => null,
+  ZAxis: () => null,
+  Treemap: () => null,
 }));
 
 test('renders without crashing', () => {
@@ -37,7 +49,6 @@ test('renders sidebar and tab bar', () => {
 });
 
 test('full query-to-response flow', async () => {
-  jest.useFakeTimers();
   render(<App />);
 
   // Type a query
@@ -46,18 +57,14 @@ test('full query-to-response flow', async () => {
 
   // Submit
   const submitButton = screen.getByLabelText('Send query');
-  fireEvent.click(submitButton);
-
-  // Thinking indicator should appear
-  expect(screen.getByText('Analyzing your query...')).toBeInTheDocument();
-
-  // Advance past the loading delay
-  act(() => { jest.advanceTimersByTime(500); });
+  await act(async () => {
+    fireEvent.click(submitButton);
+  });
 
   // Response should appear
-  expect(screen.getByText(/Electronics dominates/)).toBeInTheDocument();
+  await waitFor(() => {
+    expect(screen.getByText(/Electronics dominates/)).toBeInTheDocument();
+  });
   // The user query is shown in the conversation
   expect(screen.getByText('You asked:')).toBeInTheDocument();
-
-  jest.useRealTimers();
 });

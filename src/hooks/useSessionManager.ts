@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChatSession, View } from '../types';
+import { ChatSession, View, UploadedDataset } from '../types';
 import { generateId } from '../utils/id';
 import { loadSessions, usePersistSessions } from './useLocalStorage';
 
@@ -76,6 +76,17 @@ export function useSessionManager() {
     setSessions(updatedSessions);
   };
 
+  const handleAddDataset = (dataset: UploadedDataset) => {
+    if (!currentSession) return;
+    setSessions((prev) =>
+      prev.map((s) =>
+        s.id === currentSessionId
+          ? { ...s, datasets: [...(s.datasets || []), dataset] }
+          : s
+      )
+    );
+  };
+
   return {
     sessions,
     setSessions,
@@ -86,5 +97,10 @@ export function useSessionManager() {
     handleSelectSession,
     handleRenameSession,
     handleDeleteSession,
+    handleAddDataset,
+    handleImportSession: (session: ChatSession) => {
+      setSessions((prev) => [session, ...prev]);
+      setCurrentSessionId(session.id);
+    },
   };
 }

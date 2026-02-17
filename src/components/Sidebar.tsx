@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChatSession } from '../types';
-import { MessageSquare, Plus, Clock, Trash2, Menu, X, Pencil } from 'lucide-react';
+import { MessageSquare, Plus, Clock, Trash2, Menu, X, Pencil, Download, Upload, FileJson } from 'lucide-react';
 import { format } from 'date-fns';
+import { exportAsJSON, exportAsMarkdown, importFromJSON, downloadFile } from '../utils/conversationIO';
 
 interface SidebarProps {
   sessions: ChatSession[];
@@ -10,6 +11,7 @@ interface SidebarProps {
   onNewSession: () => void;
   onRenameSession: (sessionId: string, newName: string) => void;
   onDeleteSession: (sessionId: string) => void;
+  onImportSession?: (session: ChatSession) => void;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({
@@ -19,6 +21,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onNewSession,
   onRenameSession,
   onDeleteSession,
+  onImportSession,
 }) => {
   const [collapsed, setCollapsed] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -56,6 +59,36 @@ export const Sidebar: React.FC<SidebarProps> = ({
     }
   };
 
+  const handleExportJSON = (e: React.MouseEvent, session: ChatSession) => {
+    e.stopPropagation();
+    const json = exportAsJSON(session);
+    downloadFile(json, `${session.name.replace(/[^a-z0-9]/gi, '_')}.json`, 'application/json');
+  };
+
+  const handleExportMarkdown = (e: React.MouseEvent, session: ChatSession) => {
+    e.stopPropagation();
+    const md = exportAsMarkdown(session);
+    downloadFile(md, `${session.name.replace(/[^a-z0-9]/gi, '_')}.md`, 'text/markdown');
+  };
+
+  const handleImport = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    input.onchange = async (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+      try {
+        const text = await file.text();
+        const session = importFromJSON(text);
+        onImportSession?.(session);
+      } catch {
+        alert('Failed to import session. Invalid file format.');
+      }
+    };
+    input.click();
+  };
+
   return (
     <>
       <button
@@ -73,6 +106,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <Plus size={18} />
             New Chat
           </button>
+          {onImportSession && (
+            <button className="import-session-button" onClick={handleImport} title="Import session from JSON">
+              <Upload size={14} />
+              Import
+            </button>
+          )}
         </div>
 
         <div className="sidebar-content">
@@ -148,6 +187,22 @@ export const Sidebar: React.FC<SidebarProps> = ({
                         aria-label={`Rename ${session.name}`}
                       >
                         <Pencil size={14} />
+                      </button>
+                      <button
+                        className="rename-session-button"
+                        onClick={(e) => handleExportJSON(e, session)}
+                        title="Export as JSON"
+                        aria-label={`Export ${session.name} as JSON`}
+                      >
+                        <FileJson size={14} />
+                      </button>
+                      <button
+                        className="rename-session-button"
+                        onClick={(e) => handleExportMarkdown(e, session)}
+                        title="Export as Markdown"
+                        aria-label={`Export ${session.name} as Markdown`}
+                      >
+                        <Download size={14} />
                       </button>
                       <button
                         className="delete-session-button"

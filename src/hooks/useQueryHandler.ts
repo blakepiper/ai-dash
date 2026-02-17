@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { ChatSession, View, ConversationMessage } from '../types';
-import { processQuery } from '../services/mockAI';
+import { processQueryAsync } from '../services/aiService';
 import { generateId } from '../utils/id';
 
 export function useQueryHandler(
@@ -10,13 +10,30 @@ export function useQueryHandler(
   activeViewId: string,
   setSessions: React.Dispatch<React.SetStateAction<ChatSession[]>>
 ) {
-  const handleSubmitQuery = useCallback((query: string) => {
+  const handleSubmitQuery = useCallback(async (query: string) => {
     if (!currentSession || !currentView) return;
 
     const lastMessage = currentView.messages[currentView.messages.length - 1];
     const lastResponse = lastMessage?.response;
 
-    const response = processQuery(query, lastResponse);
+    let response;
+    try {
+      response = await processQueryAsync(query, lastResponse);
+    } catch (error) {
+      response = {
+        id: generateId(),
+        type: 'text' as const,
+        text: `An error occurred while processing your query: ${error instanceof Error ? error.message : 'Unknown error'}. Please check your configuration and try again.`,
+        explanation: 'The query could not be processed due to an error.',
+        interpretation: {
+          intent: 'Error handling',
+          entities: [],
+          dataSource: 'N/A',
+          assumptions: ['An error occurred during query processing'],
+        },
+        timestamp: new Date(),
+      };
+    }
 
     const newMessage: ConversationMessage = {
       id: generateId(),

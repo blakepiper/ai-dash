@@ -1,6 +1,6 @@
 import React, { useState, KeyboardEvent } from 'react';
 import { Send, Sparkles } from 'lucide-react';
-import { exampleQueries } from '../services/mockAI';
+import { exampleQueries } from '../services/aiService';
 
 interface QueryInputProps {
   onSubmit: (query: string) => void;

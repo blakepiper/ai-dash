@@ -24,6 +24,14 @@ function deserialize(json: string): ChatSession[] {
           timestamp: new Date(m.response.timestamp),
         },
       })),
+      pinnedCharts: (v.pinnedCharts || []).map((p: any) => ({
+        ...p,
+        pinnedAt: new Date(p.pinnedAt),
+      })),
+    })),
+    datasets: (s.datasets || []).map((d: any) => ({
+      ...d,
+      uploadedAt: new Date(d.uploadedAt),
     })),
   }));
 }

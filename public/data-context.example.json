@@ -1,0 +1,19 @@
+{
+  "datasets": [
+    {
+      "name": "your_dataset_name",
+      "description": "Description of what this dataset contains",
+      "columns": [
+        {
+          "name": "column_name",
+          "type": "string | number | date",
+          "description": "What this column represents",
+          "businessTerm": "Optional business term for this metric"
+        }
+      ]
+    }
+  ],
+  "glossary": {
+    "Term": "Definition of the business term"
+  }
+}

@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { ChartRenderer } from './ChartRenderer';
 import { ResponseMessage } from '../types';
-import { Download, Image, Info, Copy, Check } from 'lucide-react';
+import { Download, Image, Info, Copy, Check, Sparkles, Pin } from 'lucide-react';
 import html2canvas from 'html2canvas';
+import { ChartData } from '../types';
 
 interface ResponseCardProps {
   response: ResponseMessage;
+  onFollowUp?: (query: string) => void;
+  onPin?: (chart: ChartData, messageId: string) => void;
 }
 
-export const ResponseCard: React.FC<ResponseCardProps> = ({ response }) => {
+export const ResponseCard: React.FC<ResponseCardProps> = ({ response, onFollowUp, onPin }) => {
   const [showInterpretation, setShowInterpretation] = useState(false);
   const [copied, setCopied] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
@@ -112,6 +115,16 @@ export const ResponseCard: React.FC<ResponseCardProps> = ({ response }) => {
               <Download size={16} />
               Export CSV
             </button>
+            {onPin && (
+              <button
+                className="action-button"
+                onClick={() => onPin(response.chart!, response.id)}
+                title="Pin chart to side panel"
+              >
+                <Pin size={16} />
+                Pin Chart
+              </button>
+            )}
           </>
         )}
 
@@ -124,6 +137,27 @@ export const ResponseCard: React.FC<ResponseCardProps> = ({ response }) => {
           {copied ? 'Copied!' : 'Copy Text'}
         </button>
       </div>
+
+      {/* Follow-Up Suggestions */}
+      {response.followUpSuggestions && response.followUpSuggestions.length > 0 && onFollowUp && (
+        <div className="follow-up-suggestions">
+          <div className="follow-up-label">
+            <Sparkles size={14} />
+            <span>Follow up</span>
+          </div>
+          <div className="follow-up-chips">
+            {response.followUpSuggestions.map((suggestion, idx) => (
+              <button
+                key={idx}
+                className="follow-up-chip"
+                onClick={() => onFollowUp(suggestion)}
+              >
+                {suggestion}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Interpretation Details */}
       {showInterpretation && (
