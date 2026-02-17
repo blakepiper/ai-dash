@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef } from 'react';
 import { ChatSession } from '../types';
 
 const STORAGE_KEY = 'ai-dash-sessions';
